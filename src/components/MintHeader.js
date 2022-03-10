@@ -86,7 +86,7 @@ export default function MintHeader() {
 						>
 							<Grid item>
 								<Typography className="grow" variant="h3" fontWeight={"900"} /* sx={{ textShadow: "2px 2px 6px" }} */>
-									BINANTS NFT
+									MetaDoge NFTS
 								</Typography>
 							</Grid>
 							<Grid item>
