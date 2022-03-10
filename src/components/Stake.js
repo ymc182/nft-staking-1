@@ -88,7 +88,8 @@ export default function Experience() {
 			error: "Error getting Approval",
 		});
 		const farmWithSigner = farmContract.connect(signer);
-		const farmTx = await farmWithSigner.stakeWithTimeLock(id, parseInt(stakeDays));
+		// const farmTx = await farmWithSigner.stakeWithTimeLock(id, parseInt(stakeDays));
+		const farmTx = await farmWithSigner.stakeWithTimeLockMinutes(id, parseInt(stakeDays));
 		const stake = await toast.promise(waitForTransaction(farmTx.hash), {
 			pending: "Staking",
 			success: "Staked!",
@@ -154,7 +155,7 @@ export default function Experience() {
 							</Button>
 							<Box sx={{ minWidth: 120, mt: 1 }}>
 								<FormControl fullWidth>
-									<InputLabel id="demo-simple-select-label">Stake Days</InputLabel>
+									<InputLabel id="demo-simple-select-label">Stake Days (Minutes for testing)</InputLabel>
 									<Select
 										labelId="demo-simple-select-label"
 										id="demo-simple-select"
@@ -164,9 +165,12 @@ export default function Experience() {
 											setStakeDays(parseInt(e.target.value));
 										}}
 									>
-										<MenuItem value={15}>15</MenuItem>
+										<MenuItem value={10}>10</MenuItem>
+										<MenuItem value={20}>20</MenuItem>
 										<MenuItem value={30}>30</MenuItem>
-										<MenuItem value={45}>45</MenuItem>
+										<MenuItem value={40}>40</MenuItem>
+										<MenuItem value={50}>50</MenuItem>
+										<MenuItem value={60}>60</MenuItem>
 									</Select>
 								</FormControl>
 							</Box>
