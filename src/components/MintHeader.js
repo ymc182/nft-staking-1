@@ -102,7 +102,7 @@ export default function MintHeader() {
 							</Grid>
 
 							<Grid item>
-								Minted {nftSupply} / 3333 || Mint Price : {mintPrice} BNB
+								Minted {nftSupply} / 1000 || Mint Price : {mintPrice} BNB
 							</Grid>
 						</Grid>
 					</Grid>
