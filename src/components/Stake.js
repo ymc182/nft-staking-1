@@ -12,7 +12,7 @@ export default function Experience() {
 	const [baseURI, setBaseURI] = useState();
 	const [stakedId, setStakedId] = useState([]);
 	const [estimateReward, setEstimateReward] = useState(0);
-	const [stakeDays, setStakeDays] = React.useState("");
+	const [stakeDays, setStakeDays] = React.useState(10);
 	const [loading, setLoading] = useState(true);
 	useEffect(() => {
 		if (!signer && !address) {
