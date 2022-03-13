@@ -24,9 +24,12 @@ export default function Experience() {
 			const balance = await contract.balanceOf(address);
 			const staked = await farmContract.getStakedToken(address);
 			const baseUri = await contract.getBaseURI();
-			await getStakedListByOwner();
-			await getTokenListByOwner();
-			await getEstimateReward();
+			const _stakedList = await getStakedListByOwner();
+			const _tokenList = await getTokenListByOwner();
+			const _est = await getEstimateReward();
+			setEstimateReward(_est);
+			setIdList(_tokenList);
+			setStakedId(_stakedList);
 			setBaseURI(baseUri);
 			setStakeBalance(staked.length);
 			setNFTBalance(balance.toString());
@@ -40,23 +43,22 @@ export default function Experience() {
 		let idArray = [];
 		stakedId.forEach((tokenId) => idArray.push(tokenId.toString()));
 
-		setStakedId(idArray);
+		return idArray;
 	};
 	const getTokenListByOwner = async () => {
 		const balance = await contract.balanceOf(address);
+		let idArray = [];
 		if (balance > 0) {
 			const ownedNFT = await contract.getTokensOfOwner(address);
-			let idArray = [];
 			ownedNFT.forEach((tokenId) => idArray.push(tokenId.toString()));
-
-			setIdList(idArray);
 		}
+		return idArray;
 	};
 	const getEstimateReward = async () => {
 		try {
 			const farmWithSigner = farmContract.connect(signer);
 			const estReward = await farmWithSigner.getRewardEstimate();
-			setEstimateReward(parseFloat(ethers.utils.formatEther(estReward.toString())).toFixed(3));
+			return estReward.toString();
 		} catch (e) {
 			console.error(e.message);
 		}
